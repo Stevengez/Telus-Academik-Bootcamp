@@ -5,10 +5,7 @@ function removeLowest(){
     let modified = originalArray.slice();
 
     // Find the lowest value
-    let lowest = modified[0];
-    for(let x=0; x<modified.length; x++){
-        lowest = modified[x] < lowest ? modified[x] : lowest;
-    }
+    let lowest = Math.min(...modified);
 
     // Remove all occurrences
     let indexToRemove = modified.indexOf(lowest);
@@ -22,16 +19,19 @@ function removeLowest(){
 }
 
 function range(start, end){
-    return originalArray.slice(start, end);
+    let result = [];
+    for(let x=start;x<=end;x++){
+        result.push(x);
+    }
+    return result;
 }
 
 function rangePrint(start, end, step = 1){
-    let result = originalArray.slice(start, end);
-
-    console.log(`Print of Range (${start},${end}) , Step: ${step}`);
-    for(let x=0;x<result.length;x=x+step){
-        console.log(result[x]);
+    let result = [];
+    for(let x=start;x<=end;x=x+step){
+        result.push(x);
     }
+    return result;
 }
 
 function sum(array){
@@ -50,7 +50,7 @@ console.log("");
 console.log("Array without Lowest Value:", removeLowest());
 console.log("Range between: ", range(2,4));
 console.log("Sum of numbers is: ", sum(originalArray));
-rangePrint(0,4);
+console.log("Range with Step: ", rangePrint(2, 4, 2));
 
 console.log("");
 console.log("############ End ############");
