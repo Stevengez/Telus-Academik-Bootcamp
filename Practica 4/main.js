@@ -8,6 +8,7 @@ const ROCK = 0;
 const PAPER = 1;
 const SCISSORS = 2;
 
+// Print the selection of the player passed
 function printSelection(selection, player){
     if(selection === ROCK){
         console.log(`${player} chose rock.`);
@@ -18,6 +19,7 @@ function printSelection(selection, player){
     }
 }
 
+// Print the winner between two players (for this case player and cpu)
 function printWinner(player, cpu){
     if(player === cpu){
         console.log("Draw!");
