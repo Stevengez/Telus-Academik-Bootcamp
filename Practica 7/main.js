@@ -23,13 +23,3 @@ setTimeout(f1, 105);
 setTimeout(f2, 15);
 setTimeout(f3, 10);
 setTimeout(f4, 100);
-
-
-function prueba(data, callback){
-    if(!callback || !(typeof callback === "function")){
-                    
-    }
-}
-
-
-}

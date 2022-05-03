@@ -1,0 +1,139 @@
+<html>
+    <header>
+        <link rel="stylesheet" href="style.css" />
+        <title>Tower of Hanoi</title>
+    </header>
+
+    <body>
+        <div>
+            <div class="header">
+                <h1>Tower of Hanoi Game</h1>
+            </div>
+            <div class="container">
+                <table width="100%">
+                    <tr>
+                        <td id="containerLeft" class="hanoicol"></td>
+                        <td id="containerCenter" class="hanoicol"></td>
+                        <td id="containerRight" class="hanoicol"></td>
+                    </tr>
+    
+                    <tr>
+                        <td>
+                            <button id="moveFL" class="btn">Seleccionar</button>
+                        </td>
+                        <td>
+                            <button id="moveFC" class="btn">Seleccionar</button>
+                        </td>
+                        <td>
+                            <button id="moveFR" class="btn">Seleccionar</button>
+                        </td>
+    
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+
+    <script>
+
+        // Set the game level, 3 or more, less would be too easy
+        let level = 3;
+        let steps = 0;
+        
+        // Logic Variables
+        let isSelected = false;
+        let origin;
+        let destination;
+
+        //Game starting, fill the blocks 
+        let first;
+        for(let x=1;x<=level;x++){
+            let newBar = document.createElement('div');
+                newBar.id = `${x}`;
+                newBar.innerHTML = `${x}`;
+                newBar.className = `bar`;
+                newBar.style = `width: ${x}rem`;
+                
+            document.getElementById('containerLeft').appendChild(newBar);
+        }
+
+        function move(e){
+            if(!isSelected){
+                switch(e.target.id){
+                    case "moveFL":
+                        origin = document.getElementById("containerLeft");
+                        break;
+                    case "moveFC":
+                        origin = document.getElementById("containerCenter");
+                        break;
+                    case "moveFR":
+                        origin = document.getElementById("containerRight");
+                        break;
+                    default:
+                        console.log("what?");
+                        break;
+                }                
+
+                if(origin.childElementCount == 0) return;
+                document.getElementById('moveFL').innerHTML = "mover aqui";
+                document.getElementById('moveFC').innerHTML = "mover aqui";
+                document.getElementById('moveFR').innerHTML = "mover aqui";
+            }else{
+                // Is trying to move something to here
+                switch(e.target.id){
+                    case "moveFL":
+                        destination = document.getElementById("containerLeft");
+                        break;
+                    case "moveFC":
+                        destination = document.getElementById("containerCenter");
+                        break;
+                    case "moveFR":
+                        destination = document.getElementById("containerRight");
+                        break;
+                    default:
+                        console.log("what?");
+                        break;
+                }
+
+                if(origin.childElementCount == 0){
+                    window.alert("Invalid Move");
+                }else{
+                    if(destination.childElementCount == 0){
+                        // Destination is empty, just move it
+                        let origin_bar = origin.children[0];
+                        origin.removeChild(origin_bar);
+                        destination.appendChild(origin_bar);
+                    }else{
+                        // Valida if is valid move
+                        let origin_bar = origin.children[0];
+                        let dest_top_bar = destination.children[0];
+
+                        if(origin_bar.id < dest_top_bar.id){
+                            origin.removeChild(origin_bar);
+                            dest_top_bar.before(origin_bar);
+                        }else{
+                            window.alert("Invalid Move");
+                        }
+                    }
+                }
+
+                // Restore value for button
+                document.getElementById('moveFL').innerHTML = "seleccionar";
+                document.getElementById('moveFC').innerHTML = "seleccionar";
+                document.getElementById('moveFR').innerHTML = "seleccionar";
+            }
+            
+            isSelected = !isSelected;
+            // Verify Victory 
+            if(destination.childElementCount == level && destination.id !== 'containerLeft'){
+                window.alert(`Game Won with ${steps} steps.`);
+            }else{
+                steps++;
+            }
+        }
+
+        document.getElementById('moveFL').addEventListener('click', (e) => move(e));
+        document.getElementById('moveFC').addEventListener('click', (e) => move(e));
+        document.getElementById('moveFR').addEventListener('click', (e) => move(e));
+    </script>
+</html>
