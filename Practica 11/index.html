@@ -1,0 +1,31 @@
+<html>
+
+    <header>
+        <title>Acortador de Links</title>
+        <link rel="stylesheet" href="styles.css"/>
+        
+    </header>
+
+    <body>
+        <div class="container">
+            <h1>Enter a URL</h1>
+
+            <div class="centered">
+                <input id="shortLinkInput" type="text" class="inputext" placeholder="Paste an URL here..."/>
+                <button id="shortButton" onclick="shortURL()">
+                    <progress id="shortProgress" class="d-none"></progress>
+                    <span id="shortLabel" class="d-block">Acortar URL</span>
+                </button>
+            </div>
+        </div>
+
+        <br/><br/>
+
+        <div class="container">
+            <p>Your shortened url is: </p>
+            <p id="shortResult" class="result"></p>
+            <button id="shortRefresh" class="d-none" onclick="refresh()">Refresh</button>
+        </div>
+    </body>
+    <script type="text/javascript" src="script.js" ></script>
+</html>
